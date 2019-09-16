@@ -6,7 +6,7 @@ const server = http.createServer((request, response) => {
   // More details here: https://github.com/zeit/serve-handler#options
   return handler(request, response, {
     rewrites: [
-      { source: '/', destination: '/main' }
+      { source: '/', destination: '/main.html' }
     ],
     directoryListing: false
   })
