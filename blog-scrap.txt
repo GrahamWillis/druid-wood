@@ -1,0 +1,25 @@
+
+Introduction
+
+Much of my work over recent years had been back-end development and server-side work for corporate clients. I had written countless micro-services and database applications using Java frameworks and the front end development I was doing was either basic HTML designs for government where simplicity was a at a premium or back-office administration systems using old fashioned JQuery to enhance the usability of applications. I needed to write a single-page application.
+
+I knew that both React and Angular 2, as well as some more recent entrants to the overcrowded JavaScript framework market each have their advocates and detractors. Eventually after a little research I decided to write my project in React because I perceived it to have a component-based philosophy à la UNIX rather than the more opinionated and monolithic Angular.
+
+I wanted to make use of a small npm package I had written, star-search which supported star-schema optimizations on an in-memory JavaScript datasets. A set of bitmap indexes is created for a fact dataset allowing highly optimized queries to be run against combinations of values from a set of dimension datasets. See https://en.wikipedia.org/wiki/Bitmap_index
+I decided I would build a simple BI tool, which would support cross-tab type reports with accompanying graphics. This would have the characteristic that any single change to a component of the report would have the effect of changing every other component on the report; this would give React’s state and life-cycle aspects a thorough working over.  
+
+Architecture
+
+My application would comprise of two components; a server written in NodeJS which would support queries on a large static date-set using star-search. The queries would be exposed as a GraphQL API.
+The front-end would take to form of a single-page application primarily designed for desktop use. I know that this deviates from the modern best practice of mobile-first product design, however small screens are particularly challenging for very data rich applications such as BI clients and since the object of the exercise was not to lesson on responsive design but an exploration of React I decided that mobile use would be a secondary consideration. 
+During the course of developing the front-end I explored both Redux and the Apollo Client before settling on React-hooks for state management. I found that the Apollo Client did not scale well as the application became more complex. 
+   
+Getting Started
+In the first instance I wanted to avoid any simplified generators or project initializers and build the application from the ground up. This I hoped would provide me with a better insight into the components I was using. 
+The Server
+Using Hapi, the server looks like this:
+index.js
+
+This sets up the server which serves two endpoints; 
+(1) The single page application http://0.0.0.0:8080/start.html
+(2) The GraphQL API at http://0.0.0.0:8080/graphql
